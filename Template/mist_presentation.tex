@@ -1,0 +1,66 @@
+\documentclass[aspectratio=1610]{beamer}
+\usepackage{etex}
+\usetheme[
+	menuwidth={0.3\paperwidth},%
+	url={mistlab.ca}
+	]{polymtl}
+
+\setbeamercovered{transparent=20}
+
+
+\begin{document}
+
+\AtBeginSection[]
+{
+   \begin{frame}
+       \frametitle{Outline}
+       \tableofcontents[currentsection]
+   \end{frame}
+}
+
+\title[Current Projects]{Current Projects at the MIST Laboratory}
+\subtitle{}
+\author[J. DOE]{
+		John Doe\\
+		%\vspace{-0.2em}
+		Polytechnique Montr\'eal\\ 
+}
+
+\institute{
+Polytechnique Montreal
+}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+
+\begin{frame}{Table of contents}
+  \tableofcontents
+\end{frame}
+
+\appendix
+\newcounter{finalframe}
+\setcounter{finalframe}{\value{framenumber}}
+
+\begin{frame}
+\frametitle{The End}
+\begin{center}
+{\Huge Questions?}\\
+\url{http://mistlab.ca}\\
+\includegraphics[height=4cm]{images/mistlogo.pdf}
+\end{center}
+\end{frame}
+
+%\setcounter{framenumber}{\value{finalframe}}
+%
+%\section*{References}
+%\begin{frame}[allowframebreaks]
+%        \frametitle{References}
+%        \bibliographystyle{amsalpha}
+%        \bibliography{polymtl_presentation.bib}
+%\end{frame}
+%
+%\setcounter{framenumber}{\value{finalframe}}
+
+\end{document}
