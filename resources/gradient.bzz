@@ -1,0 +1,26 @@
+function init() {
+  iteration = 0
+  if(id == 7) {
+    mydist = 0
+  }
+  else {
+    mydist = 600
+    # Listen to other robots' distances
+    neighbors.listen("dist_to_source",
+      function(value_id, value, robot_id) {
+        var n = neighbors.get(robot_id)
+        if (n != nil and value != nil) {
+          mydist = math.min(mydist, n.distance + value)
+        }
+      })
+  }
+}
+function step() {
+  # Displaying with gradient of color
+
+  # Set message to be passed every 3s
+  if(iteration % 10 == 0 and mydist < 600) {
+    neighbors.broadcast("dist_to_source", mydist)
+  }
+  iteration = iteration + 1
+}

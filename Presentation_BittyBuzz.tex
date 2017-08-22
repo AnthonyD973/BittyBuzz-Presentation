@@ -1,4 +1,5 @@
 \documentclass{beamer}
+\usepackage{multimedia}
 \usepackage[comma,numbers,compress,square]{natbib}
 \usepackage{listings}
 \usetheme{polymtl}
@@ -8,6 +9,16 @@
 \date{\today}
 
 \graphicspath{{resources/}}
+\definecolor{darkorange}{RGB}{230,102, 0}
+\newcommand{\tabitem}{~~\llap{\color{darkorange}\textbullet}~~}
+
+\AtBeginSection[]
+{
+	\begin{frame}
+	\frametitle{Content}
+	\tableofcontents[currentsection]
+	\end{frame}
+}
 
 
 % ========================================
@@ -94,8 +105,13 @@ void bbz_c_closure() {
 		\frametitle{Outline}
 		\tableofcontents
 	\end{frame}
-	\begin{frame}
-		\section{Meeting Constraints}
+	\section{Overcoming resource limitations}
+	\begin{frame}{Resource comparison}
+		Let us start by comparing the 2 targeted platforms:
+		\begin{itemize}
+			\item {\bfseries Khepera IV}: Robot with a system able to support Buzz.
+			\item {\bfseries Kilobot}: Robot with \textbf{very} little resources available.
+		\end{itemize}
 		\begin{table}
 			\begin{tabular}{l|c|c}
 				& Khepera IV        & Kilobot\\
@@ -110,8 +126,40 @@ void bbz_c_closure() {
 				\label{table:khepera kilobot comparison}Table \ref{table:khepera kilobot comparison}: Resource comparison between the Khepera IV and Kilobot robots \cite{khepera_specs}}
 		\end{table}
 	\end{frame}
+	\subsection{Dynamic memory management}
+	\begin{frame}{Dynamic memory management}
+		\begin{itemize}
+			\item Internal pre-allocated heap % Fixed size
+			\item 3 sections: Objects, Segments and Unclaimed
+			\item All objects have 2 bytes payload and 1 byte meta-data
+			% ... which allows for a ...
+			\item Simple GC algorithm
+		\end{itemize}
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{schematic_heap.jpg}
+			\caption{
+				\label{figure:heap sections}Fig. \ref{figure:heap sections}: Section placement in the heap}
+		\end{figure}
+	\end{frame}
+	\subsection{Point on Optimizations}
+	\begin{frame}{Point on Optimizations}
+		Some optimizations made on BittyBuzz, grouped by what they optimize:
+		\begin{table}
+			\begin{tabular}{l|l|l}
+				RAM & Flash & Bandwidth\\
+				\hline
+				\tabitem Closures & \tabitem Function vs Macros & \tabitem Sorted neighbors\\
+				\tabitem 2B payload & \tabitem Optimized loops & \tabitem Ring-buffers\\
+				\tabitem Unique alloc & \tabitem Translated bytecode &\\
+				\dots & \dots & \dots
+			\end{tabular}
+			\caption{
+				\label{table:Optimizations}Table \ref{table:Optimizations}: Some of the optimizations made to BittyBuzz}
+		\end{table}
+	\end{frame}
+	\section{$BittyBuzz \approx Buzz$}
 	\begin{frame}
-		\section{$BittyBuzz \approx Buzz$}
 		Differences between Buzz and BittyBuzz are minimal. Nonetheless, \textbf{what differences have resulted from these limitations?}\\
 		\[Buzz - BittyBuzz =~?\]
 		Theorem (accepted):
@@ -122,8 +170,8 @@ void bbz_c_closure() {
 		\end{split}
 		\end{align}
 	\end{frame}
+	\subsection{Architecture}
 	\begin{frame}
-		\subsection{Architecture}
 		\frametitle{Architecture}
 		Microcontrollers with no standardized OS $\Rightarrow$ existance of platform-dependant operations.\\
 		Out of the box, BittyBuzz thus has \textbf{two layers of implementation}:
@@ -132,8 +180,8 @@ void bbz_c_closure() {
 			\item Thin, lower-level robot layer for \textbf{platform-dependant operations} (fetching bytecode, displaying errors, sending and receiving packets, ...). Must be implemented for each robot.
 		\end{itemize}
 	\end{frame}
+	\subsection{Buzz features}
 	\begin{frame}
-		\subsection{Buzz features}
 		\frametitle{Buzz features}
 		Consistency with Buzz has been a key factor to the development choices, however \textbf{some features still have limitations}. Examples:
 		\begin{itemize}
@@ -142,8 +190,8 @@ void bbz_c_closure() {
 			\item \texttt{swarm} IDs range from 0 to 7.
 		\end{itemize}
 	\end{frame}
+	\textsl{\textsl{}}\subsection{Closure definitions}
 	\begin{frame}
-		\subsection{Closure definitions}
 		\frametitle{Closure definitions}
 		Buzz C closures allow a user to call a C function from the Buzz side. Making them in BittyBuzz is also very similar.\\
 		~\\
@@ -152,12 +200,45 @@ void bbz_c_closure() {
 			\caption{\label{figure:C Closures}Fig. \ref{figure:C Closures}: C Closures in Buzz vs. BittyBuzz}
 		\end{figure}
 	\end{frame}
+	\section{Project results}
+	\subsection{Distance Gradient Algorithm}
 	\begin{frame}
-		\section{Project results}
-		Lorem ipsum dolor sit amet etc.
+		\begin{figure}
+			\lstinputlisting[language=Python,basicstyle=\tiny,showspaces=false,breaklines=true,keywordstyle=\color{darkorange},commentstyle=\color{gray}]{resources/gradient.bzz}
+			\caption{
+				\label{figure:gradient code}Fig. \ref{figure:gradient code}: Distance gradient source code}
+		\end{figure}
 	\end{frame}
+	\begin{frame}{Distance Gradient Algorithm}
+		\centering
+		\movie[width=\linewidth,height=0.5625\linewidth,showcontrols,start=64s,poster]{distance gradient demo}{resources/gradient.mov}
+	\end{frame}
+	\subsection{Stigmergy Demo}
 	\begin{frame}
-		\section{Future work}
+		\begin{figure}
+			\lstinputlisting[language=Python,basicstyle=\tiny,showspaces=false,breaklines=true,keywordstyle=\color{darkorange},commentstyle=\color{gray}]{resources/stigmergy.bzz}
+			\caption{
+				\label{figure:stigmergy code}Fig. \ref{figure:stigmergy code}: Stigmergy demo source code}
+		\end{figure}
+	\end{frame}
+	\begin{frame}{Stigmergy Demo}
+		\centering
+		\movie[width=\linewidth,height=0.5625\linewidth,showcontrols,start=64s,poster]{distance gradient demo}{resources/stigmergy.mov}
+	\end{frame}
+	\subsection{Swarm Demo}
+	\begin{frame}
+		\begin{figure}
+			\lstinputlisting[language=Python,basicstyle=\tiny,showspaces=false,breaklines=true,keywordstyle=\color{darkorange},commentstyle=\color{gray}]{resources/swarm.bzz}
+			\caption{
+				\label{figure:swarm code}Fig. \ref{figure:swarm code}: Swarm demo source code}
+		\end{figure}
+	\end{frame}
+	\begin{frame}{Swarm Demo}
+		\centering
+		\movie[width=\linewidth,height=0.5625\linewidth,showcontrols,start=64s,poster]{distance gradient demo}{resources/swarm.mov}
+	\end{frame}
+	\section{Future work}
+	\begin{frame}{Future work}
 		So that's it?\\
 		~\\
 		No. There is still more work to be done for BittyBuzz:
@@ -172,8 +253,8 @@ void bbz_c_closure() {
 			When you're finished changing, you're finished. -- Benjamin Franklin
 		\end{quote}
 	\end{frame}
+	\section*{}
 	\begin{frame}
-		\section{}
 		\frametitle{Concluding words}
 		Lorem ipsum dolor sit amet etc.
 	\end{frame}
