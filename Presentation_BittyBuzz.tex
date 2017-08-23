@@ -93,9 +93,9 @@ void bbz_c_closure() {
 	\end{frame}
 	\begin{frame}
 		\frametitle{Introduction}
-		\textbf{BittyBuzz}: Reimplementation of Buzz for microcontrollers. Designed for very cheap robots with extreme resource constraints.\\
+		\textbf{BittyBuzz}: Reimplementation of \textbf{Buzz for microcontrollers}. Designed for very cheap robots with extreme resource constraints.\\
 		~\\
-		Currently, only implementation is for Kilobots, inexpensive robots designed by Harvard to swarm in the thousands \cite{kilobot_paper}.
+		Currently, only implementation is for \textbf{Kilobots}, inexpensive robots designed by Harvard to swarm in the thousands \cite{kilobot_paper}.
 		\begin{figure}
 			\includegraphics[width=0.5\textwidth]{swarm2}
 			\caption{\label{figure:Kilobots}Fig. \ref{figure:Kilobots}: A Kilobot Batalion \cite{kilobot_pic}}
@@ -165,15 +165,15 @@ void bbz_c_closure() {
 		Theorem (accepted):
 		\begin{align}
 		\begin{split}
-		Buzz - BittyBuzz = ~&\Delta Architecture + \Delta (Buzz~features)\\
-		+ &\Delta (Closure~definitions) + (small~details)
+		BittyBuzz - Buzz = ~&\Delta Architecture + \Delta (Buzz~features)\\
+		+ &\Delta (Closure~definitions) + (small~improvements)
 		\end{split}
 		\end{align}
 	\end{frame}
 	\subsection{Architecture}
 	\begin{frame}
 		\frametitle{Architecture}
-		Microcontrollers with no standardized OS $\Rightarrow$ existance of platform-dependant operations.\\
+		Microcontrollers with no OS $\Rightarrow$ existance of platform-dependant operations.\\
 		Out of the box, BittyBuzz thus has \textbf{two layers of implementation}:
 		\begin{itemize}
 			\item Higher-level "core" layer for \textbf{platform-independant operations} (VM bytecode execution, definition of \texttt{swarm}, \texttt{stigmergy}, ...).
@@ -245,7 +245,7 @@ void bbz_c_closure() {
 		\begin{itemize}
 			\item Implementation of \textbf{BittyBuzz for zooids}.
 			\item Keep BittyBuzz up to date with new Buzz features.
-			\item General improvements.
+			\item Many, many general improvements.
 			\item Conduct \textbf{research projects using BittyBuzz}.
 		\end{itemize}
 		~\\
@@ -253,10 +253,23 @@ void bbz_c_closure() {
 			When you're finished changing, you're finished. -- Benjamin Franklin
 		\end{quote}
 	\end{frame}
-	\section*{}
-	\begin{frame}
-		\frametitle{Concluding words}
-		Lorem ipsum dolor sit amet etc.
+	\begin{frame}{Concluding words}
+		\section{}
+		All in all, BittyBuzz:
+		\begin{itemize}
+			\item Reworks (and somewhat improves) Buzz, targetting the \textbf{specific limitations of inexpensive robots};
+			\item Attempts to \textbf{behave as Buzz} whilst allowing for easy extension to new robots ;
+			\item Can implement simple swarm behaviors \textbf{on Kilobots}.
+		\end{itemize}
+	\end{frame}
+	\begin{frame}{Concluding words (continued)}
+		\begin{quote}
+			So long, and thanks for all the fish!
+		\end{quote}
+		\begin{figure}
+			\includegraphics[width=0.7\textwidth]{the_great_interns}
+			\caption{\label{figure:The Great Interns}Fig. \ref{figure:The Great Interns}: "And now, for something completely different..."}
+		\end{figure}
 	\end{frame}
 	\begin{frame}[allowframebreaks]
 		\frametitle{References}
