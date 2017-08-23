@@ -85,7 +85,7 @@ void bbz_c_closure() {
 		\frametitle{Introduction}
 		\begin{itemize}
 			\item Buzz: \textbf{Description of collective swarm behavior} with both top-down and bottom-up approaches \cite{buzz_arxiv}. Details of information propagation are hidden.
-			\item Swarm intelligence and behavior require large numbers of robots with limited resources $\Rightarrow$ result must be achieved with the \textbf{cheapest robots possible}.
+			\item Swarm intelligence and behavior require large numbers of robots with limited resources $\Rightarrow$ results must be achieved with the \textbf{cheapest robots possible}.
 		\end{itemize}
 
 		\centering \Large
@@ -160,8 +160,8 @@ void bbz_c_closure() {
 	\end{frame}
 	\section{$BittyBuzz \approx Buzz$}
 	\begin{frame}
-		Differences between Buzz and BittyBuzz are minimal. Nonetheless, \textbf{what differences have resulted from these limitations?}\\
-		\[Buzz - BittyBuzz =~?\]
+		Differences between BittyBuzz and Buzz are minimal per design choice. Nonetheless, \textbf{what differences have resulted from these limitations?}\\
+		\[BittyBuzz - Buzz =~?\]
 		Theorem (accepted):
 		\begin{align}
 		\begin{split}
@@ -173,12 +173,13 @@ void bbz_c_closure() {
 	\subsection{Architecture}
 	\begin{frame}
 		\frametitle{Architecture}
-		Microcontrollers with no OS $\Rightarrow$ existance of platform-dependant operations.\\
+		Microcontrollers with no OS $\Rightarrow$ existence of platform-dependant operations.\\
 		Out of the box, BittyBuzz thus has \textbf{two layers of implementation}:
 		\begin{itemize}
 			\item Higher-level "core" layer for \textbf{platform-independant operations} (VM bytecode execution, definition of \texttt{swarm}, \texttt{stigmergy}, ...).
 			\item Thin, lower-level robot layer for \textbf{platform-dependant operations} (fetching bytecode, displaying errors, sending and receiving packets, ...). Must be implemented for each robot.
 		\end{itemize}
+		This is contrary to Buzz, which only contains the "core" layer, and requires implementation for each platform.
 	\end{frame}
 	\subsection{Buzz features}
 	\begin{frame}
@@ -257,7 +258,7 @@ void bbz_c_closure() {
 		\section{}
 		All in all, BittyBuzz:
 		\begin{itemize}
-			\item Reworks (and somewhat improves) Buzz, targetting the \textbf{specific limitations of inexpensive robots};
+			\item Reworks (and somewhat improves) Buzz, targetting the \textbf{specific limitations of inexpensive robots using microcontrollers};
 			\item Attempts to \textbf{behave as Buzz} whilst allowing for easy extension to new robots ;
 			\item Can implement simple swarm behaviors \textbf{on Kilobots}.
 		\end{itemize}
